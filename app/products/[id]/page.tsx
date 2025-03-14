@@ -1,27 +1,27 @@
-import NotFoundPage from '@/app/not-found';
-import { products } from '../../product-data';
-import Image from 'next/image';
+import NotFoundPage from "@/app/not-found";
+import { products } from "@/app/product-data";
 
-export default function ProductsDetailsPage({ params }: { params: { id: string } }) {
-  const product = products.find((product) => product.id === params.id);
+export default function ProductDetailPage({ params }: { params: { id: string } }) {
+  const product = products.find(p => p.id === params.id);
+
   if (!product) {
-    return <NotFoundPage />;
+    return <NotFoundPage/>
   }
+
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
-      <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">Product Details</h2>
-      <div className="relative w-full h-96 mb-6">
-        <Image
+    <div className="container mx-auto p-8 flex flex-col md:flex-row">
+      <div className="md:w-1/2 mb-4 md:mb-0 md:mr-8">
+        <img
           src={'/' + product.imageUrl}
           alt="Product image"
-          layout="fill"
-          objectFit="cover"
-          className="rounded-lg"
-        />
+          className="w-full h-auto rounded-lg shadow-md" />
       </div>
-      <p className="text-xl font-semibold text-gray-700 text-center">{product?.name}</p>
-      <h3 className="text-lg font-medium text-gray-600 mt-4">Description</h3>
-      <p className="text-gray-600 mt-2 leading-relaxed">{product?.description}</p>
+      <div className="md:w-1/2">
+        <h1 className="text-4xl font-bold mb-4">{product.name}</h1>
+        <p className="text-2xl text-gray-600 mb-6">${product.price}</p>
+        <h3 className="text-2xl font-semibold mb-2">Description</h3>
+        <p className="text-gray-700">{product.description}</p>
+      </div>
     </div>
   );
 }
