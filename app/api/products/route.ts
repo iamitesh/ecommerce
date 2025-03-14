@@ -1,0 +1,14 @@
+import {products} from '../../product-data'
+export async function GET() {
+    return new Response(JSON.stringify(products), {
+        status: 200,
+        headers:{
+            'Content-Type':'application/json'
+        }
+    })
+}
+export async function POST() {
+    return new Response('Hello from API POST', {
+        status: 200
+    })
+}
