@@ -1,34 +1,26 @@
-'use client';
-
-import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Product } from "./product-data";
 
 export default function ProductsList({ products }: { products: Product[] }) {
-  const [cartProducts, setCartProducts] = useState([]);
-
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
-      {products.map((product) => (
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+      {products.map(product => (
         <Link
           key={product.id}
           href={`/products/${product.id}`}
-          className="block bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105"
+          className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition duration-300"
         >
-          <div className="relative w-full h-96">
+          <div className="flex justify-center mb-4 h-48 relative"> {/* Added height and relative positioning */}
             <Image
               src={'/' + product.imageUrl}
-              alt={product.name}
-              layout="fill"
-              objectFit="cover"
-              className="rounded-t-lg"
+              alt="Product image"
+              fill // Fill the container
+              className="object-cover rounded-md" // Cover the container, maintaining aspect ratio
             />
           </div>
-          <div className="p-4 text-center">
-            <h2 className="text-lg font-semibold text-gray-800">{product.name}</h2>
-            <p className="text-gray-600 mt-2">${product.price}</p>
-          </div>
+          <h2 className="text-xl font-semibold mb-2">{product.name}</h2>
+          <p className="text-gray-600">${product.price}</p>
         </Link>
       ))}
     </div>
