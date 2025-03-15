@@ -4,7 +4,6 @@ export async function GET() {
   });
 }
 
-
 export async function POST() {
   return new Response(JSON.stringify({message:'Thank you for posting to this handler'}), {
     status: 200,
